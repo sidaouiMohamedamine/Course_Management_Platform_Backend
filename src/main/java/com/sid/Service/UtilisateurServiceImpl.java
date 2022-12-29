@@ -20,5 +20,18 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         return utilisateurRepository.save(utilisateur);
     }
 
+    @Override
+    public void affecterUtilisateurClasse(Integer idUtilisateur, Integer codeClasse) {
+        Utilisateur utilisateur=utilisateurRepository.findById(idUtilisateur).orElse(null);
+        Classe classe=classeRepository.findById(codeClasse).orElse(null);
+        utilisateur.setClasse(classe);
+        utilisateurRepository.save(utilisateur);
 
+
+    }
+
+    @Override
+    public Integer nbUtilisateurParNiveau(Niveau nv) {
+        return utilisateurRepository.nbUtilisateurParNiveau(nv);
+    }
 }

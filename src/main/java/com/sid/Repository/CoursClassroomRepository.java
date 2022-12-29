@@ -8,8 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.websocket.server.PathParam;
+
 @Repository
 public interface CoursClassroomRepository extends JpaRepository<CoursClassroom,Integer> {
 
+    @Query("select c.codeClasse from Classe c where c.codeClasse=:codeClasse")
+    Integer findCodeClasse(@PathParam("codeClasse")Integer codeClasse);
+    @Query("SELECT SUM(cc.nbHeures) FROM CoursClassroom cc WHERE cc.specialite =:specialite AND cc.classe.niveau = :niveau")
+    Integer nbHeuresParSpecialiteEtdNiveau(@Param("specialite") Specialite specialite, @Param("niveau") Niveau niveau);
 
 }

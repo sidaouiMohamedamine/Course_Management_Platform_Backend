@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur,Integer> {
 
-
+    @Query("select count(c) from Utilisateur u,Classe c where c.codeClasse=u.classe.codeClasse and c.niveau=:nv")
+    public Integer nbUtilisateurParNiveau(@Param("nv")Niveau nv);
 
 
 }
